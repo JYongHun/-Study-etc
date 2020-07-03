@@ -110,15 +110,14 @@ Youtube API   reference 확인할것
 // 받은 버전 이버전이 더 편하고 좋음
 
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <network-security-config>
-        <base-config cleartextTrafficPermitted="true">
-            <trust-anchors>
-                <certificates src="system" />
-            </trust-anchors>
-        </base-config>
-    </network-security-config>
-</PreferenceScreen>
+<network-security-config>
+<base-config cleartextTrafficPermitted="true">
+    <trust-anchors>
+        <certificates src="system" />
+    </trust-anchors>
+</base-config>
+</network-security-config>
+
 
 그 다음에 AndroidManifest.xml 파일의 <application> 부분에 networkSecurityConfig속성 추가
 	<application 
