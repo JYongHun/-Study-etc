@@ -1,0 +1,8 @@
+variable, value, primitive type, reference type, promotion, casting, operator, operand, operations, expressions,
+unary, signedOperator, increaseOperator, notOPerator, binary, arithmeticOperator, stringConcatenationOperator,
+comparisonOperator, logicalOperator, assignmentOperator, ternary conditional expressions, conditional, switch
+case, break, continue, while, loop, classification, object, stack, heap, method, memory, thread, interface, exception,
+Array, commend, Multidimensional, enumeration, constant, compare, program, oriented, field, access modifier,
+inheritance, extends, polymorphism, instance, library, constructor, string, integer, char, float,double,boolean
+public, protected, default, private, parameter, return, Overrideing, singleton, package, import, annotation, element,
+abstract

@@ -1,0 +1,77 @@
+라이브러리는 주기적으로 버전을 확인해야함. 그러기떄문에 reference자주보자 
+
+Glide		ImageDownload
+	
+dependencies {
+  implementation 'com.github.bumptech.glide:glide:4.11.0'
+  annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+}
+	
+	Method
+		placeholder() default이미지 세팅 
+
+	Tip) repositories  build.gradle 첫번쨰에 있음
+
+
+	W/System.err: java.io.FileNotFoundException: https 
+
+	- 헤더가 필요한 url의 경우 : GlideUrl로 URL을 만들고 User-Agent 헤더를 추가 합니다.
+                GlideUrl url = new GlideUrl(stringUrl, new LazyHeaders.Builder()
+                        .addHeader("User-Agent", "your-user-agent")		// 헤더가 1개 보다 많을땐 addHeader()추가
+                        .build());
+                Glide.with(this).load(url).into(imageView);
+
+
+Volley			시간날떄 자세히 따로 공부
+	Volley는 Android 앱의 네트워킹을 더 쉽고, 무엇보다도 더 빠르게 하는 HTTP Library입니다
+	reference 잘읽어볼것
+
+	 dependencies {
+    	    implementation 'com.android.volley:volley:1.1.1'
+    	}
+
+	네트워크 연결  manifest에서 설정 해줘야함
+	<uses-permission android:name="android.permission.INTERNET"/>
+	
+	Java
+	멤버 변수로 request URL지정
+	parameter값 설정
+	volley 이용 (Volley reference 페이지 간단한 요청 보내기 String 을 json으로 변환해서쓴거임)
+ 	- RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+ 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                     	  (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                           	 @Override
+                           	 public void onResponse(JSONObject response) {
+
+                           	 }
+                       	 }, new Response.ErrorListener() {
+                            	@Override
+                          	  public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
+	requestQueue.add(jsonObjectRequest);  !!!!!! add 필수
+
+	api이용할때는 json을 많이 이용함 
+	
+	Request 의 방법: JsonObject,JsonArray,String
+	
+	- JsonObjectRequest(Request.Method.GET,url,null,new Respon.....) 
+		JsonObjictRequest를 한이유는 처음 괄호의 시작이 { 이기 떄문  [ 시작하면 Array로 받아야함
+		GET을 쓴이유 해당 reference에 HTTP Method가 GET이라 POST면 POST로 
+		reference를 잘활용 해야함.
+		GET과 POST를 많이씀 간혹 PUT,DELETE (네가지는 알아야함)
+
+	- onResponse()
+ 		정상적으로,api 호출이 완료되었을때 호출됨.
+ 		response 변수에, 데이터가 실려서 옵니다.
+		여기서 , 우리가 원하는 데이터를 파싱합니다.
+		.setText() 하면 JSON으로 표현됨   url.getString ("lyrics")  Alt + Enter
+		
+	- onErrorRespons()
+		서버가 문제가 생겨서, 정상적으로 동작하지 않을때 이 메소드가 호출됨.
+		error 변수에, 왜 에러가 났는지 데이터가 들어있음.
+
+	- RequestQueue와 JsonObjectRequest 연결하는 법  RequestVarName.add(JsonVarName)
+
+

@@ -1,0 +1,124 @@
+메모리와데이터( 저장소에 data저장하는 방법)  예시 = 자동로그인	단어 템플릿
+
+메모리와 저장소의 차이
+	- 메모리는 휘발성   (앱을 종료하면 데이터가 날라감)
+	- 저장소의 저장 방식 TextFile,     Shared Preferences,   Database 3가지 
+	- 안드로이드에서  TextFile 사용 거의 안함 
+
+Shared Preferences
+	간단한 값 저장에 DB를 사용하기에는 복잡하기 때문에 SharedPreferences를 사용하면 적합하다.
+	- Constructor
+		SharedPreferences variable = getSharedPreferences(dbname, MODE_PRIVATE)
+	
+	- 데이터 입력 
+	 	SharedPreferences.Editor editor = variable.edit();
+		editor.putType("key",value);
+
+	- 데이터 호출
+		getType("key",null);
+
+SQLiteDatabase
+
+	SQLite는 다른 데이터베이스에 비해 사용 가능한 자료형이 많지않고 5가지를 지원한다.
+	NULL
+	INTEGER : 1,2,3,4,6,8bytes의 정수값
+	REAL : 8bytes의 부동소수점값
+	TEXT : UTF-8, UTF-16BE, UTE-16LE 인코딩의 문자열
+	BLOB : 입력된 그대로 저장
+
+	문법은 reference를 확인할것
+
+	- id 값이 있을때 중복처리 
+	가져오는 데이터의 아이디 값이 있다면 테이블 생성시 오토 인크리먼트를 안해야 중복생성이 안됨
+	중복되는 아이디가 error 나는것은 무시해도됨
+
+	SELECT 명령을 제외한 대부분의 명령을 execSQL(String sql); 메서드로 실행 할 수 있다.
+	Tip) SQLiteDatabase db   를 사용하면 항상 db.close() 를 사용해야함 
+	
+	- 문법이 SQL문과 유사함 
+		varchar = text, int = integer , update, delete.... 다름
+
+	- constant Class, data variable Class(ex)id,name,phone),handler Class 설계해야함.
+
+	- Handler Class 
+		Inheritance SQLiteOpenHelper, Overridie Method, Constructor에 super setting
+		super ( context,dbname,null,int version)
+
+	- 설계
+		create table -> drop table -> add(insert) -> get(one select) -> getAll(all select)
+		-> update ->delete ->count....
+	
+	- create table
+		SQL문과 거의 동일 autoincrement 위치 _ 주의   작성후 db.execSQL(String variable);
+
+	- drop table  위와 동일 
+
+	- add (insert) 	parameter = ModelClass 	작성자가 method를 만들어야함
+		parameter = DataVariable Class		
+		SQLiteDatabase variable = getWritableDatabase():
+		ContentValuse values = new ContentValues():  	    일단 insert하는 클래스라고 기억
+		values.put() : SQL insert 문의 values() 를 put()에 넣는다고 생각
+		variable.insert(table상수,null,values)     values 저장하고 insert 해야함
+	`	variable.close(); database를 항상닫아야함 
+	
+	Tip) 수정 삽입등은  Writable 	읽기만 한다면 readable
+
+	- get(one select)		parameter = id
+		- select 하는 Cursor 첫번째 방법
+		getReadableDatabase	Object 생성	
+		Cursor cursor = db.query(SQL문 작성)			Cursor 는 행을 참조함
+		db.query() 작성 순서 tablename-> 모든 컬럼을 String[] 생성 -> selection  " = ?"
+		" = ?"  는 , new String[]{String.valueOf(id)} -> groupBY -> having -> orderBY
+		
+		if(cursor != null) {  cursor.moveToFirst();  }    Cursor를 제일 처번쨰 Row로 이동 시킴
+			
+		column 의 값을 해당 type에 맞게 variable에 저장
+		column의 변수들을 mobleClass에 저장 후 return;
+	
+	- getAll (All select)
+		- select 하는 Cursor 두번쨰 방법
+		return type을 ArrayList<modelClass>로 하는게 좋음
+		getReadabledDatabase	Object 생성	
+		Sting selectAll = "select * from " + Util.TABLE_NAEM;
+		Cursor cursor = db.rawQuery(selectAll,null)	SQL문 을 작성해서 Cursor에 입력
+	
+		if(cursor.moveToFirst()){
+			do{
+			Type var = cursor.getString(columnindex:)
+			ModelClass var1 = new ModelClass();
+			var1.setType( var );
+			modelClassList.add( var1 );
+			}while(cursor.moveToNext());    Cursor를 다음 Row로 이동 시킨다.
+		return modelClassList;
+
+		selete오더바이 문  order by id desc
+
+	- update   parameter = ModelClass
+		getWritableDatabase();    Object 생성
+		ContentValues  Object 생성후 variable.put(column, model.getData);
+		SQL 테이블 update 문 작성 보통 id로 where 설정
+		
+		int ret = db.update(Util.TABLE_NAEM,				테이블명
+				ContnetValues.variable, 			업데이트할 value
+				Util.KEY_ID+" = ? ",				where 
+				new String[]{String.valueOf(model.getId())});	= ? 에 들어갈 값
+		db.close();						항상 db를 닫아줘야함
+		return ret;
+
+	- delete 	parameter = ModelClass
+		update 문과 비슷 where id값만 지정해서 삭제 db.delete( ..... )
+
+	- 나머지 like,count .... 위와 형식은 같음 조금씩 변형해서 사용하면 됨
+
+
+
+
+
+	    
+
+
+
+
+
+
+

@@ -1,0 +1,111 @@
+Object Oriented Programming(그 해당 구성요소 행동할수있는 액션 구분)(캡슐화,추상화,다형성,상속성???)
+
+class != instance(object)
+
+Object = 구성요소와 동작
+Class =  
+	Object의 공통점을 찾아내서, 하나의 틀을 만드는것(class 는 틀 실물이 없는것). 
+            구성요소를 variables로 만듬  (member variables)(field)
+            class name 항상 대문자로 시작,class 가 찍어내는 결과는instance or object로 불림 
+	동작을 Method로 부름 생성할떄 생기는 것을 constructor
+
+Member Variable or (Field??)
+	객체의 데이터가 저장되는곳
+
+Method 
+	Class 안의 function을 Method라 부름
+	다른 object를 생성해서 다양한 기능을 수행하기도함
+	Method는 object 간의 데이터 전달의 수단으로 사용된다 외부로터 매개값을 받을수도 있고,
+	 실행후 return할수도있다
+
+Method Overloading 
+	 parameter  다른  같은 이름의 Method or Constructor를 여러 개 선언하는것 ,
+	이름이 동일하고 parameter가 다른 method 면 parameter 에따라 자동으로 실행함
+	parameter가 겹치지않는한 동일한 naming
+
+Method Override(@Override)
+	inheritance 받은 이름이 같은method의 안의 내용을 바꾸는걸 method override
+
+Constructor(생성자)
+	Object 생성될때 같이 생성됨, 생성시 초기화 역활을 담당
+	Test2 var = new Test2();      --> Test2() constructor
+	constructor 은 class name 과 같아야함, datatype을 쓸필요가 없음, 함수 타입(리턴값)이 없다.
+	Object 생성하면서 parameter값을 생성할수있음
+	객체를 생성할 떄를 제외하고는 클래스 밖에서 호출할수 없다.
+            부모에서 Constructor를 추가하면 아무것도 없는 Constructor를 Overloding을 해야함
+	
+	ex)class name {member variabels, Method(),Constructor }    
+	tip) Heap가 제한없이 저장가능
+	      new -memory 새로운 Object 생성
+	      일단은 간단하게 Stack - function호출될때        Heap - Object 생성될떄
+               
+                          class로 object를 생성하는 방법
+          Product p =  new Product();  main 생성된 p는 Product를 가르킴으로 저장됨
+                     Heap                         Stack
+                   ---Product 1----          ---main----
+                    constructor                 p: 
+                    member variables   
+                    -------------------         ------------  
+               new 단어가 나오면  memory에  Object를 새로 생성함   
+
+this. (다른 생성자 호출,            parameter 와 member variable 이름 중복시)
+	this.해당Object의 member variable를 말한다
+
+Extends (상속 inheritance) 
+
+	class에서 겹치는것이있는가 겹치는걸모아서 상위로 올려서 naming한것
+	자식이 부모를 선택함
+
+	ex) extends    :   public class Child extends Parent{}     chlid는   parent를 extends을 받았다 
+                     
+
+	부모를 extends받는 자식 객체를 생성하면 부모 객체도 생성이됨 원래있던 부모 객체와는 다른 객체
+ 	ex)
+ 	   Heap
+    	---Parent:p1---
+    	name;  age; private temoney;
+    	----------------
+    	---Parent:ch1--
+    	name; age;
+    	---Child : ch1---
+    	hobby
+   	------------------
+
+tip) - 모든class는 ObjectClass를 상속받고있다  (android studious단축키 ctrl+ ins)
+
+Upcasting , Downcasting(자세히 볼필요 없음)  이것이 자바다 5  polymorphism 에 있음
+	Upcasting SuperParent sp = new SuperChild 
+       			상속을 받았기때문에 부모는 자식을 가르킬수가 있다 
+	Downcasting
+		Downcasting은 자신의 고유한 특성을 잃은 서브 클래스의 객체를 다시 복구 시켜주는 것을 말한다. 
+		그러니까 업캐스팅된 것을 다시 원상태로 돌리는 것을 말한다
+		업캐스팅이 선행되어있어야 됨
+
+Access Modifier  접근제어자
+	public, private, default, protected
+	public : 적용대상 클래스,필드,생성자,메소드
+	protected : 적용대상 필드, 생성자, 메소드  자식클래스가 아닌 다른패키지에 소속된 클래스는 안됨
+	default : 적용대상 클래스,필드,생성자,메소드 다른패키지에 소속된클래스는 안됨
+	private : 적용대상 필드,생성자,메소드 모든 외부클래스안됨
+		필드는 멤버변수
+Super   (spuer.Name)
+	부모생성자를 호출한다.
+	내 부모 Object 를 가르킴
+	내 부모Object의 함수 or member 호출하는것
+	반드시 자식클래스의 생성자 첫 라인에서 부모의 생성자를 호출해야 합니다.
+	자식클래스의 생성자 내에서 반드시 부모의 생성자를 호출해야함
+	super.  ,   super() 
+
+		super.  부모의 Membervariable이나 Method에 접근하고자 
+		super() 부모의 생성자를 요구 할 때 사용 
+		->반드시 첫문장에 와야함 , 자식이 생성할때 생성자에는 super() 생략되어있음 
+
+final
+	클래스를 생성했는데 다른 클래스에서 상속못하게하는 키워드 final - 클래스 앞에 final
+	함수앞에 final 을 붙이면  overried못하게함 
+	member var 도 바꿀수 없다  결코 수정될수 없다 
+	Final Method 를 사용하여 만드는 variable을 constant(상수)라고함
+
+	AbstractClass interface 나중에 해라
+  
+

@@ -1,0 +1,7 @@
+formatting
+-formatting number 숫자나 날짜를 내가 원하는 형태로 만드는것 String
+   DecimalFormat  ex) 123.234234 a = DecimalFormat("0.00")  a.format(num)  
+    123.23 해당 숫자의 보여주는 소수점을 정할수있음 #은 비어있음 매꿔라
+- Sting formatting {0}{1}{2}  {}은 변수가 들어갈자리 0부터 시작 \n 줄바꿈
+   MessageFormat.format(text, a, b, c)
+역슬레쉬n은 줄바꿈

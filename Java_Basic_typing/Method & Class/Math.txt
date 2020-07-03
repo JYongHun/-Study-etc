@@ -1,0 +1,7 @@
+Math function
+객체를 생성안해도 매서드를 쓸수있다
+- Math.ads() 는 절대값을 구하는 함수 -표시는 없어짐
+- Math.ceil() 올림 , Math.floor() 내림 , Math.round() 반올림
+- Math.max(date,date ) 큰것 , Math,min(date,date)작은거 , Math.random()*a;  0~1사의값  0~a의 값  
+    ex) double num = (int)(Math.random()*a)+1; +1 앞 과 뒷자리수 가 1씩늘어남
+- Math.log10()  = int length = (int)(Math.log10(a)+1);  숫자 수 파악 

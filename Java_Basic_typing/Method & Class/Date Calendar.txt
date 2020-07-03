@@ -1,0 +1,27 @@
+Dete Calendar Class
+
+- Date 현재날짜와 시간을 저장한 객체생성
+  Method 
+	toString() 현재 요일 달 일 시각 타임존 년도 출력
+	after(),before,compareTo,equals,getTime, setTiem(해보면서 추가하자)
+- SimpleDateFormat(); 
+	내가원한는형태로 바꿀수있음 
+	G 연대, y 년도, M월, w해당년도의 몇번쨰 주 1~53, W 해당월의 몇 번째 주 1~5
+	D해당 연도의 몇 번쨰 일1~366, d 해당월의 몇번쨰 일1~31, F해당 월의 몇 번쨰 요일(1~5)
+	E 요일, a ap/pm, H시간 0~23, h시간 1~12, K 시간 0~11, k 1~24시간, m 분 0~59
+	s초 0~59, S 1/1000초 0~999 , Z타임존 +0900 , z타임존 kst 
+
+- Calendar  
+	   클래스는 추상 클래스로 생성자를 제공하지 않는다. 따라서, Calendar 클래스의 
+	   객체를 생성하기 위해 new 연산자를 사용할 수 없다.  
+	   그 대신 getInstance() 메소드를 사용하여 현재 날짜와 시간의 객체를 얻어올 수 있다.
+
+	Constant
+		YEAR,   MONTH, DATE,   WEEK_OF_YEAR,   WEEK_OF_MONTH,   DAY_OF_YEAR
+		DAY_OF_MONTH,   DAY_OF_WEEK,   HOUR(12),   HOUR_OF_DAYA(24)
+		MINUTE,SECOND 등등 많음
+	
+	Method
+		getTime(),  get(),  set(),  setTime(),........... (써보고 적자)
+		
+

@@ -1,0 +1,91 @@
+Java
+ 문법은 외우자
+main function 은 project당 하나  CPU실행시 무조건 첫번째
+
+Data type 
+
+- String var = "string", char var = '' or Integer, int var= 1; float var= 3000f; boolean ...
+Variables 
+- CPU는항상 위에서 아래 왼쪽에서오른쪽, 예외) variable = 은 오른쪽을 왼쪽으로 메모리에 저장하라,function 
+-  variables은 항상 메모리에있다
+   variables = value 기호가있어야 메모리에저장  int x; 하면 value 가없어서 메모리 할당만됨
+-  variables 이름앞에는 숫자는 안됨 (ex: 1fish) , 파랑색 이름은 variables 이름으로안됨,
+    예약된 variables 은 variables name으로 안됨
+- 선언된 variables는 {} 안에서 사용된다
+
+Values = 값
+
+Data type String
+
+- char ''  String은 ""
+
+Operator
+
+Arithmetic Operator            (산술 연산자) 
+-  +  * /  % a  ++ --  java는 제곱 없음 library
+
+Comparison Operator          (비교)
+- == , !=(Not equal) , > , < , >= , <= 
+
+Logical Operator           (논리)
+- &&(and) , ||(or)
+
+Conditional(조건문Value = boolean) 
+- 조건이 없다면 실행을 안함 , Conditional 중간에  Loop도 가능
+  else if 는 여러개들어가도 됨 if는 Conditional 시작 else  끝
+   ex)  if - then
+        if() -{then} - else{}
+        if() - {then} - else if() - {then} - else{}
+
+switch () 
+- 숫자나 문자하나 (True False 아님 결국 char아닌가 ??) break가없의면 쭉 내려가면서 계속 실행
+  switch() { case 1(1or A): break; case 4:1orA;break; default; break; }
+
+Loop
+-  패턴찾는게 중요 변하는부분과안변하는 부분찾기 , Loop 중간에 Conditions 가능
+   많이씀)break  빠져나가고 continue는 해당 반복부분 탈출후 다음 반복 실행
+
+for : 조건이 Ture 일경우 돌아와서 조건을 검사한단 조건이 거짓이 될때까지 반복한다
+      for 문안에서 정의된 variables은 for문이 끝나면 메모리에서 사라진다
+      tip: keyword pattern ,중첩된for를 많이씀, Conditions 가능
+	for(초기화 ; 종료조건; 증감수식){ 실행}    초기화 1  종료조건 2 실행3 증감 4   1234234234234......
+      
+while 
+	true를 쓰면 무한루프가됨
+do-while 한번 실행하고 조건이 트루이면 반복함
+
+Iterator
+- 읽어 올 요소가 남아있는지 확이하는 메소드 있으면 true 없으면 false
+- 객체를 만들어 사용 느림 자동으로  index관리
+- Iterator<data type> var = var1.iterator();
+  boolean hasNet();  while 과 사용
+
+Array [ ]
+- array  의  index 0부터 시작 , 직접지정해서 저장할땐 { }
+- int[ ] arr; 
+- arr = new int[5]; //new int[] 는  변수를 선언할때의 [ ]0부터 시작안함, index 는 0부터시작,
+   length
+
+Multidimensional(다차원) Arrays
+
+ex)
+    int[][] arr = new int [3][4]; (3행 4열)
+
+                   0   1   2   3    
+  
+            0     11 22 33 44
+            1     55 66 77 88
+   	2     12 13 14 15 
+            Array Access  arr[0][3]    33
+
+Function
+- cpu의 실행순서에 영항을 줌 중요,                 cpu는 main부터 시작
+- parameter 데이터를 줄 필요 없다면 parameter 안적어도됨 function name();으로 호출
+
+Return
+- return 은 function의 끝   void는 return 값이 없다 , return 하면 바로 function 호출한곳으로감
+- return data type 이 같아야함 즉시 function 호출한곳으로 돌아가면서 값을 반환하고  function memory 삭제
+ex) 
+	1 data type 2 function name 3 parameter or arguments
+	int add (int a, int b){  int c =0; c = a+b;  return c; }  (int 와 return 의 데이터 타입은 같아야함)
+ 	1    2        3

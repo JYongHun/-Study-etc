@@ -1,0 +1,104 @@
+Linux  
+
+putty 로 접속하는것 ssh접속
+centos  ip 찾는법 ifconfig -a  192.168.122.1     윈도우 ipconfig 192.168.0.26
+
+Terminal 명령어
+- Linux 는 제일 처음의 디렉토리가 / (최상위 경로), / 앞에 붙이는건 절대 경로,  ./ 현재 디렉토리
+	User 의 디렉토리는 ~ 로 표시  * ~~~  ~~~를 모두찾아라
+	. 으로시작된건 숨긴 디렉토리(ll -a 보는법)
+
+- pwd 현재위치 출력
+- history -c  기억된 명령을 모두 삭제  
+- Tab 자동완성
+- cd  디렉토리로이동 cd .. cd ~
+- clear ,man 도움말 , ctrl c 는 강제 중지, exit 빠져나가기
+- ls 현재위치 파일내용, ll 현재위치 파일자세한 내용, 
+- cat 파일 내용을 출력
+- shutdown -r 재부팅,
+- rm  remove의 약자 Linux 는 휴지통이없음 복구 불가능,rm -rf 디렉토리 지우는법
+- cp 파일이나 디렉터리 복사 , 복사한 사용자의 소유가됨 그래서 읽기권한이 필요
+- mv 이름 변경하거나 현제 커서의 파일을 다른 디렉토리로 이동(경로를 처음부터 쓸것),
+	 mv String* String 으로시작하는것들은 전부 이동
+- mkdir 디렉토리 생성 
+- touch 빈파일 하나를 만들어줌
+- ./filename 실행
+- useradd name passewd  유처 추가  sudo 슈퍼로 행동해라
+
+
+link
+
+하드링크   -> 원본파일 데이터
+심복릭 링크 파일 ->원본 파일 포인터 -> 원본파일 데이터
+
+ln filename hardlink
+ln -s filename softlink
+
+
+yum  서버에 소프트웨어를 요청하는것
+yum install  (yum -y install 안물어보고 바로설치)
+yum check-update 업데이트할수있는 소프트웨어 보여줘라
+yum update
+yum info  해당 소프트웨어의정보보는것 
+yum remove
+
+파일 유형  -> 파일 허가권(9자리3자리씩 구분) -> 링크수 -> 파일 소유자 이름 -> 
+			파일 소유 그룹이름 -> 파일 크기 -> 마지막 변경 시간 날짜 -> 파일이름
+
+- vi 파일을 수정할수있는 에디터
+	단축키 a i insert,  x delete
+	:w save  :wq save 나가기  :q나가기 :q!저장안하고 강제로 나가기
+
+
+	맨 앞자리는 파일 유형
+권한 	r = Read w = Writing  x = Execution (실행) (r은 2의 2승 w는 2의1승  x 2의0승)
+	rwx    r은 4 w2 x 1 9자리  3자리씩 끊어서 첫번째 사용자 두번쨰 그룹 세번쨰 그외
+	chmod 권한 변경 명령어 (chmod 777 파일 이름)
+	권한 전부 추가 + , - (r,w,x)
+		chmod(체인지모드약자)               r        w       x                    
+		chmod 704 /home/mike             2^2 + 2^2  + 2^0        4 + 2 +1 = 7    
+		chmod 707 /home/mike             파일 허가권 9자리 중 3자리씩             rwx--xr-x = 7 1 5
+
+파일 압축 
+	zip윈도우와 호환되는 압축  zip은 압축 파일 네이밍을하고 압축파일을 써야함
+	     zip name filename 압축 unzip filename 압축해제
+	bzip2 각각 하나씩 압축파일을 만듬 확장자 bz  , gzip 확장자gz
+	bzip2 -d 압축 해제  gzip -d   unzip
+	
+	-tar묶음 파일  파일 네이밍에 tar과 무슨zip인지 적어야 구별할수있음
+	  동작 - c :새로운 묶음을 만든다. x : 묶인파일을 푼다 t : 묶음을 풀기 전에 묶인 경로르 보여준다
+	          C : 지정된 디렉터리 압축푼다
+	  옵션 - f(필수) : 묶음 파일 이름 지정  v : visual 파일이묶이거나 풀리는 과정을 보여줌
+		J : tar +xz,  z: tar+gzip, j : tar bzip2
+		c x t C f v J z j
+
+find
+	find 경로(그경로 아래를 찾음) -name ""
+	옵션 -name -user -newer -perm(허가권) -size  옵션 조건 -print(기본값), -exec(외부 명령실행)
+
+crontab   (root 로해야함)  특정시간에 명령을 시킬수있음
+	분->시->일->월->요일->사용자->실행명령
+	   *모든 월 or 일       
+	vi /etc/crontab  ,   systmectl status crond crontab 이 작동하는지 확인 하는 명령어
+	  systemctl restart crond
+	root 계정이아닌 일반 유저 crontab -e              -l 은확인
+
+네트워크 관련 필수개념  
+	TCP/IP  네트워크상으로 의사소통을 하는 약속을 프로토콜 이라고 부르는데,
+		프로토콜중 가장 널리 사용되는 종류 중 하나
+
+	호스트 이름 도메인 이름 
+	IP주소
+	네트워크 주소
+
+프로세스, 데몬, 서비스
+	프로세스 - 현재 실행중인 프로그램 하드에저장된 파일(프로그램)이 메모리에 올라와서 실해중인 프로그램
+			(하드에 저장된 실행코드가 , 메모리에 로딩되어 활성화 된것)
+			프로세스 번호  각각의 고유번호 (강제로제거하려면 프로세스 번호가필요함)
+	데몬 (윈도우는 백그라운드 프로세스)
+		- 사용자의 눈에는 안보이지만 계속 실행되고 있는것 , d로끝나면 데몬이라는것
+	서비스
+
+
+
+

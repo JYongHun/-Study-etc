@@ -1,0 +1,63 @@
+LocalDate class
+
+LocalDate 로컬 날짜 클래스로 날짜 정보만 필요할 때 사용하면 된다.
+
+	Method 
+		getYear()-int 년 , getMonth()-Month열거 값(JANUARY...),  getMonthValue()-int 월(1,2,3,....),
+		getDayOfYear()- int 일년의 몇 번쨰 일, getDayOfMonth() -int 월의 몇 번쨰 일
+		getDayOfWeek-DayOfWeek(MONDAY....), isLeapYear()-boolean 윤년여부
+
+LocalTime 로컬 시간 클래스로 시간 정보만 필요한 떄 사용하면 된다.
+	
+	Method 	
+		getHour() -  int , getMinute() -int, getSecond()-int, getNano()-int나노초
+
+LocalDateTime  날짜와 시간 정보 모두가 필요할떄 사용하면 됨
+
+ZonedDateTime ISO-8601 달력 시스템에서 정의하고 있는 타임존의 날짜와 시간을 저장하는 클래스이다 
+
+	ex)
+	ZonedDateTime utcDateTime = ZonedDateTime.now(ZoneId.of("UTC"));
+   	ZonedDateTime seoulDateTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+
+	Method
+		getZone() : Zoneld를 리턴 (Asia/Seoul)  리턴타입 Zoneld
+		getOffset() : UTC와의 시차를 리턴(+09:00) 리턴타입 ZoneOffset
+
+LocalDate, LocalDateTime, ZonedDateTime 날짜와 시간을 더하거나 뺴는 Method
+                                                                               s 가들어감
+	plusYears(long)  - 더하기  Years,Months,Days,Weeks,
+	minusYears(long) - 뺴기    Years,Months,Days,Weeks,
+
+LocalTime, LocalDateTime, ZonedDateTime 날짜와 시간을 더하거나 뺴는 Method
+
+	plusHours(long)  - 더하기Hours,Minutes,Seconds,Nanos
+	minusHours(long) - 뺴기  Hours,Minutes,Seconds,Nanos 
+
+날짜와 시간을 변경하는 메소드
+
+	withYear(int) - 변경 Year,Month,Day,Week,Hour,Minute,Second,Nano  
+	with(TemporalAdjusters.  ) - 현재 날짜를 기준으로 상대적인 날짜로 변경
+	whit(TemporalAdjusters.firstDayOfYear()) -   이번 년도의 첫 번째 일 (1월 1일)........ 많음
+
+날짜 비교하기   리턴타입 boolean
+
+	var.isBefore(endDateTime); var이 endDateTime 보다 이전 날짜 인지 비교
+	 isBefore,      isEqual(),    isAfter
+	날짜는 Equal 있음 시간은 Equal없음
+
+날짜 차이 계산하기??
+	
+	-untill(ChronoLocalDate endDate) 날짜 리턴타입  Period 시간 리턴타입 long
+ 	 getYears(); .........
+	-between(LocalDate starDate, LocalDate endDate); 날짜 리턴타입 period 시간 리턴타입 long
+	 getMonths() ......
+
+전체 시간을 기준으로 차이 계산
+
+	ChronoUnit.YEARS .......(class) 전체 년 차이
+날짜 formmting
+
+
+
+

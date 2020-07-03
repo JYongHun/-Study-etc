@@ -1,0 +1,105 @@
+Operator  (Operations연산 , Operator연산자, Operand 피연산자, expressions  연산식)
+
+operator expressions
+
+Operator (+, -, *, /, %,, --, ++, !=, ==, >=, <= <, >, !, &&, ||.......)
+
+Operations 의 방향과 우선 순위
+
+	동일한 우선 순위의 Operator는 Operations의 방향이 있다 (왼쪽에서 오른쪽으로 수행)
+	Unary Operator(++,--,!,~), 부호 Operator(+,-) , 대입 Operator는(= , +=,-=...) 이 있다면 
+	오른쪽에서 왼쪽으로 수행
+
+	우선순위 Unary>Binary>Ternary>Arithmetic(산술)>Comparison(비교)>Logical(논리)>Assignment(대입)  ()는 최우선 순위
+
+Unary(단항) Operator
+
+	Operand가 1개인 연산자
+	Signed +,- increase(증감) ++,--  부정 ! 비트 반전 ~ 
+	
+-Signed(부호) Operator  
+	+ 부호 유지 - 부호 변경  int type 보다 아래의 datatype은 int로 변경이됨
+
+-increase(증감) Operator  ++ --
+	ex) y++, ++x  모두 1이지만  ++x + 10 == 12  ,  y++ + 10 == 11 
+	     Operations 수행 순사가 다름 x는 다른 Operations 수행전,y는 다른 Operations 수행후 수행
+
+-부정(false???) Operator !
+	Operand는 반드시 boolean만 제외한 모든 primitive type에 사용가능하다
+
+bit 반전 Operator ~
+
+Binary(이항) Operator
+	Operand 가 2개인 Operator
+	Arithmetic, String, Concatenation, assignment, Comparison, Logical, 비트놀리, 비트 이동
+
+-Arithmetic Operator
+	+ , - , *, /, %    boolean타입은 안됨
+	operations의 산출 타입은 int 이다. long타입이 하나있을겨우엔 long타입으로 변환 후 Operation한다
+	실수 타입이 있을경우 크기가 큰 실수 타입으로 변환후 실행한다
+	overflow 인해 잘못된 값이 산출되는 것을 방지
+	정확한 계산은 정수를 사용
+
+	NaN과 Infinity Operations을 조심(무한대로 값이나오는것을 조심)
+
+-String concatenation(연결) Operator (+)
+	Operand 중 String 이 있으면 String로 결합한다
+
+-Comparison Operator 
+	==, !=, <, >, <=, >=  모든 타입에 사용 가능 단 boolean 은 동등비교만 사용 가능
+	String 비교는 동등 비교만 사용가능(== , !=)하지만 String이 같은지,다른지 비교하는 용도로는 사용하지 않는다
+	Stirng 비교는 equals() Method를 사용함
+
+-Logical Operator
+	Operand 는 boolean만 사용 가능  &&    ||    ^   !
+
+-bit Operator  쓸일 없을듯...
+	&, |, ^, ~, <<, >>, >>>
+	정수 타입만 bit operations 이 가능함
+
+-Assignment(대입) operator
+	=, +=,-=,*=,/= ..........
+	오른쪽 operand 값을 좌측 operand인 variable에 저장
+
+Ternary(삼항) Operator
+
+-조건 연산식 (conditional expressions) ? :
+	operand1 ? operand2 : operand3
+	true일경우 2실행 false일경수 3실행  conditional에 따라 클론(:) 앞뒤의 operand가 선택됨
+
+Conditional
+
+	조건문if, switch 반복문for, while, do-while  break, continue
+
+	if  else if  else
+	조건식의 결과에 따라 {} 블록을 실행할지 여부를 결정할 떄 사용 true면 블록을 실행, false면 블록을 실행하지 않는다.
+
+-switch   
+	value = 정수 or char or String
+	variable나 expressions의 값에 따라 실행문을 선택할 떄 사용한다
+	break 사용 잘해야함   case :    :주의
+
+-Loop
+	for while do-while
+	중괄호 블록 내용을 반복적으로 실행할 떄 사용한다.
+
+-for
+	반복 횟수를 알고 있을 떄 주로 사용
+	문법 for(1초기화식; 2조건식; 4증감식){3실행문}
+
+	while 조건에 따라 반복을 계속할지를 결정할 떄 사용
+	ex) int keyCode = System.in.read();
+
+-do-while
+	조건에 따라 반복을 계속할지를 결정할 떄 사용하는 것은 while문과 동일
+	무조건 중괄호{} 블록을 한번 실해하고. 조건을 검사하여 반복 결정
+
+-break 
+	for,while, do-while,switch
+	반복문이 중첩되어 있을 경우 break문은 가장 가까운 반복문만 종료
+	바깥쪽 반복문까지 종료시키려면 반복문에 이름(라벨)을 붙이고 break name; 을사용
+
+-continue
+	for, while, do-while
+	for 증감식으로 이동  중요!!
+	while, do-while 조건식으로 이동

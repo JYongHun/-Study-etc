@@ -1,0 +1,49 @@
+Collections
+- 컬렉션 사용의 장점은 배열을 사용할 떄처럼 추가, 삭제,수정등의 기능을직접구현할 필요가없고,
+   고성능,고품질을제공하므로 프로그램의 속도와 질을 높여준다, 한마디로 편리함
+
+Array list (클래스임 Object생성해야됨)
+- 데이터를 여러개를 처리하는데 가변적으로 처리할수있음 (자동으로 최대값이 늘어남)
+- ArrayList<data type> var = new ArrayList<>();  
+- 추가할려면var.add(index," ") , data를 가져올떄 var.get(index), var.remove(index,value) 정확한값을 알면 쓰면됨 
+- add(추가), var.size  (length같음) var.get(i) (arr[i]와 같음) , clear, set , sort()오름 reverse()내림, remove
+    addAll()  두개의 arraylist가 필요함 하나의 배열을 통쨰로 붙이는것  toArray, asList
+
+
+Hash map
+저장할때 키값과 그 값으로 저장하고 찾을땐 키값만 입력하면 찾을수 있다
+순서가 중요한개 아니라 key값이 중요함 
+Array list같은 값을 중복 저장가능하지만  Hash map은 똑같은키는 마지막에 입력한 값만 가지고있음 value는 중복이 가능
+int는 클래스가 아니기때문에 안됨 Integer를사용해야함 다른 숫자타입도 대문자로 되어잇는클래스를 써야함
+출력할때는 value 의 데이터타입을 써야함
+
+put() 입력 , get() 출력  , remove() , size() , values() []형태로 value 출력됨, clear() 모든 엘리먼트를 비워냄 .............
+values , keys   Object 와 같이 사용하면서 변수에 저장
+
+HashMap<String,String> var = new HashMap<>();
+
+Object[] keys = map.keySet().toArray();  // 키값을 볼수있다
+
+java문법 일단 끝
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+책 134p

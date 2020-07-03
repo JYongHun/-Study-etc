@@ -1,0 +1,119 @@
+Inheritance
+
+	Inheritance이란
+	- Object Oriented Programming
+		자식 Class가 부모Class의 member를 물려받는것
+		자식이 부모를 선택해서 물려받음
+		Inheritance 대상 부모의 Field와 Method
+
+	extends key word
+	- 자식 Class 가 Inheritance할 부모 Class를 지정하는 keyword.
+	- Java는 다중 Inheritance을 허용하지 않기 떄문에 부모 Class를 나열할 수 없다.
+
+	자식 Object를 생성하면 부모 Object도 생성되는가?
+	- 부모없는 자식 없다.
+		자식Object를 생성할 떄는 부모Object부터 생성되고 자식 Object가 생성된다.
+		부모 Constructor 호출 완료되고 , 자식 Constructor가 나중에 호출 완료된다.
+	
+	명시적으로 부모 Constructor 호출
+	- 부모 Object를 생성할 떄 , 부모 Constructor를 선택해서 호출할 수 있다.
+		super(parameter,...)은 parameter와 동일한 type,개수,순서가 맞는 부모 Constructor를 호출한다.
+		super(...)는 반드시 자식 Constructor의 첫줄에 위치해야 한다.  <----- 중요 
+		부모 Class에 기본(parameter 없는) Constructor가 없다면 필수적으로 작성해야 한다.
+
+	Method Override (재정의)
+	-부모 Class의 Inheritance Method를 수정해서 자식Class에서 Override하는 것을 말한다.
+	-Method재정의 조건
+		부모 Class의 Method선언부와 동일해야 한다.
+		Access Modifier를 더 강하게 오버리딩할 수 없다.
+			(public을 default나private으로 수정 X, 반대로 default는 public으로 수정할 수있다.)
+		새오운 예외(Exception)을 throws할 수 없다. (Exception은 12장)
+	
+	@Override Annotation
+	- 컴파일러에게 부모Class의 Method와 선언부와 동일한지 검사토록 지시한다.
+	- 정확한 Method Override를 위해 붙여 주는 것이 좋다.
+	
+	Method Override의 효과
+	- 부모Method는 숨겨지는 효과 발생(Override된 자식 Method가 먼저 실행)
+
+	부모Method super(사용)
+	- Method Override는 부모 Method를 숨기는 효과
+		자식Class에서는 Override된 Method만 호출된다.
+	- 자식 Class에서 수정되기 전의 부모 Method를 호출하고자 할 경우 super를 사용
+		super는 부모Object를 참조( != this는 자신 Object를 참조)
+		Tip) super,this는 자식Object에서만 사용	super(),this() 둘중하나만 사용가능
+
+	final keyword의 용도
+	- final Field 	: 수정할 수 없는 Field
+	- final Class 	: 부모로 사용할 수 없는 Class
+	- final Mehtod	: 자식이 Override할 수 없는 Method
+	
+	protected Access Modifier
+	- Inheritance과 관련된 Access Modifier
+		같은 package : default와 동일
+		다른 package : 자식 Class만 접근 허용   
+
+타입변환과 polymorphism(다형성)
+	
+	Polymorphism
+	-같은 type이지만 실행 결과가 다양한 Object를 대입(이용)할 수 있는 성질을 말한다.
+		부모type에는 모든 자식Object가 대입될 수 있다.(자식type은 부모 type으로 자동 type변환 된다.)
+		효과 : Object를 부품화시킬 수 있다.
+
+	Promotion(자동 타입 변환 : referenceType일경우)
+	- Program 실행 도중에 Promotion이 일어나는 것을 말한다.
+	- Inheritance계층에서 어떤 상위 type이라도 Promotion이 일어날 수 있다.	
+	- Promotion 이후의 효과  -- 책 예시가 보기 좋음 310p
+		부모Class에 선언된 Field와 Method만 접근 가능하다.
+		Method가 Override되었다면 자식 Class의 Override된 Method가 호출된다.(다형성과 관련)
+
+	Field의 Polymorphism
+	- Polymorphism을 구현하는 기술적인 방법
+		부모 타입으로 Promotion
+		Override된 Mehtod
+
+	하나의 Array로 Object 관리		318p 
+	
+	parameter의 Polymorphism
+	- parameter가 Class type일 경우
+		해당 Class의 Objcet를 대입하는 것이 원칙이나 자식 Object를 대입하는 것도 허용된다.
+
+	Casting (강제 타입 변환)
+	- 부모 타입을 자식 타입으로 변환하는 것을 말한다.
+	-조건 
+		자식 타입이 부모 타입으로 자동 변환된 이후.
+		다시 자식 타입으로 변환할 때만 유효하다.
+	- 강제 타입 변환이 필요한 경우
+		자식 타입이 부모 타입으로 Casting되면, 부모 타입에 선언된 Field와Method만 사용 가능
+		자식 타입에 선언된 Field와 Method를 다시 사용해야 한다면 Casting이 필요
+
+Abstract Class (추상 클래스)
+	
+	Abstract Class 개념
+	- Abstract   :   실체들 간에 공통되는 특성을 추출한 것을 말한다.
+		Ex)새, 곤충 , 물고기 , -> 동물(Abstract) , 삼성,현대LG -> 회사(Abstract)
+	Abstract Class
+		실체 Class들의 공통되는 Field와 Method를 별도로 정의한 Class를 말한다.
+		AbstractClass는 실체 Class의 부모 Class역활을 할 수 있다.
+		AbstractClass는 단독으로 Object 생성을 할 수 없고, 부모 Class로만 사용된다. <-- 중요
+
+	Abstract Class의 용도
+	- 실체 Class의 공통된 Field와 Method의 이름을 통일할 목적
+		실체 Class를 설계하는 사람이 여러 사람일 경우,
+		실체 Class마다 Field와 Method가 재각기 다른 이름을 가질 수 있다.
+	- 실체 Class를 작성할 때 시간을 절약
+		실체 Class는 추가적인 Field와 Method만 선언하면 된다.
+	- 실체 Class 설계 규격을 만들고자 할 떄 
+		실체 Class가 가져야할 Field와 Mehtod를 AbstractClass 에 미리 저의해 놓고
+		실체 Class는 AbstractClass를 무조건 Inheritance받아 작성토록 한다.
+
+	AbstractClass선언
+	Ex) public abstract class name {  field, Constructor,Method }  선언하면 new로 Object를 생성 못함 <-- 중요
+
+	Abstract Method와 Override
+	- Method 이름은 동일하나, 실행 내용이 실체 Class마다 다른 Method가 있을 수 있다.
+	- 구현 방법
+		AbstractClass에는 Method의 선언부만 작성한다.(Abstract Method)
+		Inheritance받은 실체 Class에서 Method실행 내용을 작성한다. (Overrideing)
+
+

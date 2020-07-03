@@ -1,0 +1,131 @@
+네트워크 강의 API
+
+API  : Application programming Interface
+	운영체제나 시스템, 애플리케이션, 라이브러리 등을 활용해 응용 프로그램을 
+	작성할 수 있게 하는 다양한 인터페이스를 의미합니다. 
+	Window API, Java API, HTML5 API, Android API 등이 있습니다
+
+API 인증
+	API게이트웨이,APi키또는 키 ,클라이언트 아이디와 클라이언트 시크릿
+
+API호출 
+	요청URL
+	request parameter	
+		API를 호출할 떄 함께 서버로 전송해야 하는값
+		각각의 API를 호출할때 필수 parameter 값과 선택 parameter 값의 이름과 방식이 다르기 
+		떄문에 항상 reference를 확인해야함  
+		parameter의 시작은 보통 ? parameter을 더할땐 & (모든 API를 확인못해서 확신은 안됨)
+
+JSON (JavaScript Object Notation)
+	중괄호 대괄호 2종류만 씀
+	중괄호 안에는 key : value 가 항상있음    :  의 왼쪽이 키 오른쪽이 value   
+	JSON에서 {} JSONObject -  key : value
+		 [] JSONArray  	 
+	response.getValue(key);
+	Tip) 요청해서 JSON 받아올떄 JsonObjectRequest 와 JsonArrayRequest 구분해서 잘써야함
+		requestQueue.add(jsonObjectRequest) 가 요청만하고 받아 오진 않음 네트워크로 하는거라
+		 시간이 걸리기 떄문  그래서 response 에서 요청한 데이터를 받아서 처리함
+
+
+Youtube API   reference 확인할것
+
+	대시보드 -> +API 사용자 설정 -> youtubeAPI 설정 ->YouTube Data API 사용 -> 사용자 인증정보 추가
+	-> 키값 받고 ->API 키 링크 누르고 -> 이름 바꾸고  -> API 제한사항 키 제한 -> API선택 후 저장 -> 녹색버튼 확인
+
+
+	SearchAPI  
+
+	Search:list
+	GET방식에서, 요청 parameter생성
+	parameter 쓰고싶을땐 ? 를 쓰고 시작  두번째부턴 & 를 씀
+	필수 parameter : part  : snippte 과 id를 씀, key		
+	
+	선택 parameter : q,maxResults,pageToken,type......
+
+	웹 비디오 연결 
+	https://www.youtube.com/watch?v="videoId"
+
+	테스트용 검색방법 			?part=snippe&key=내키값&q=검색
+	https://www.googleapis.com/youtube/v3/search?part=snippe&key= 내키값&q=검색 
+
+	Tip)텍스트 와처는 네트워크 통신에 부적합하다.
+
+
+네이버 Api  비로그인방식 오픈 API
+
+	papagoAPI
+
+	헤더에 데이터를 넣어서 요청하는 방법  (모두 가능)
+
+	valueRequest( )  parameter값에 {} 안에 getHeaders() Method안에 헤더를 작성 
+		getParams throw AuthfailureError
+
+
+	@Override
+           	 public Map<String, String> getHeaders() throws AuthFailureError {
+	                Map<String, String> params = new HashMap<String, String>();
+	                params.put("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+	                params.put("X-Naver-Client-Id","QXv6PsWMVwNKZulAU4dL");
+	                params.put("X-Naver-Client-Secre","sA3zGOSzKj");
+	                return params;
+	            }
+	
+	          //  네이버에 요청할 Parameter 를 셋팅한다.
+	            @Override
+	            protected Map<String, String> getParams() throws AuthFailureError {
+
+	                Map<String, String> params = new HashMap<String, String>();
+	                params.put("source","ko");
+	                params.put("target","zh-CN");
+	                params.put("text","안녕하세요? 만나서 반갑습니다. 잘 지내시죠?");
+	                return params;
+	
+	            }
+	        };
+	
+	StringRequest 
+	Volley의 요청방법중 하나 
+	
+	
+
+
+
+안드로이드 http프로토콜 접속 시 예외발생 조치 (ERR CLEARTEXT NOT PRERMITTED) 예뮬문제
+검색 network_security_config
+사이트 https://developside.tistory.com/85
+1. AndroidManifest.xml 파일의 <application> 부분에 android:usesCleartextTraffic="true" 로 설정
+2. networkSecurityConfig 파일을 생성하고, AndroidManifest 에 등록
+	<?xml version="1.0" encoding="utf-8"?>
+
+	<network-security-config>
+
+	    <domain-config cleartextTrafficPermitted="true">
+
+	        <domain includeSubdomains="true">ebookfrenzy.com</domain>
+
+	    </domain-config>
+
+</network-security-config>
+
+// 받은 버전 이버전이 더 편하고 좋음
+
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <network-security-config>
+        <base-config cleartextTrafficPermitted="true">
+            <trust-anchors>
+                <certificates src="system" />
+            </trust-anchors>
+        </base-config>
+    </network-security-config>
+</PreferenceScreen>
+
+그 다음에 AndroidManifest.xml 파일의 <application> 부분에 networkSecurityConfig속성 추가
+	<application 
+		android:networkSecurityConfig="@xml/network_security_config" 
+		~~~ >
+	</application>
+
+3.Android Manifest.xml 파일에서 targetSandboxVersion를 1로 설정(안되면 앱을 지웠다가 다시)
+
+<uses-permission android:name="android.permission.INTERNET"></uses-permission>
